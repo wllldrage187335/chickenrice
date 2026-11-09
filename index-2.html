@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suspend Judgement, Eat Rice</title>
+<meta name="description" content="Companion notes to our SP0001 skit on Pyrrhonian skepticism: the three stances, the Modes, Agrippa's trilemma, tranquillity and Bett's criticisms, all told through chicken rice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rice:#FBFBF8;
+  --rice-2:#F2F1EC;
+  --soy:#2A211C;
+  --soy-2:#6B5F57;
+  --line:#E3DED6;
+  --chilli:#B42A1F;
+  --ink:#33475B;
+  --cucumber:#3E6B4C;
+  --ginger:#F4DE9C;
+  --ginger-soft:#FBF1D2;
+  --gold:#C98A12;
+  --gold-deep:#B47A0B;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --measure:38rem;
+  --gutter:clamp(1rem, 5vw, 2.5rem);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:4.5rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--rice);color:var(--soy);
+  font-family:var(--serif);font-size:1.125rem;line-height:1.62;
+  font-optical-sizing:auto;
+}
+@media (min-width:48rem){body{font-size:1.1875rem}}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-color:var(--chilli)}
+:focus-visible{outline:2px solid var(--soy);outline-offset:2px;box-shadow:0 0 0 6px var(--gold);border-radius:4px}
+::selection{background:var(--ginger);color:var(--soy)}
+em,i{font-style:italic}
+.gr{font-style:italic}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:20;background:rgba(251,251,248,.94);
+  backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.bar-inner{display:flex;align-items:center;gap:1rem;padding:.6rem var(--gutter);max-width:72rem;margin:0 auto}
+.bar-title{font-family:var(--sans);font-size:.875rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;color:var(--soy-2)}
+.bar-title b{color:var(--soy);font-weight:600}
+.mode{display:inline-flex;border:1px solid var(--soy);border-radius:999px;padding:2px;flex:none}
+.mode button{
+  font:500 .8125rem/1 var(--sans);border:0;background:transparent;color:var(--soy);
+  padding:.45rem .75rem;border-radius:999px;cursor:pointer
+}
+.mode button[aria-pressed="true"]{background:var(--gold);color:var(--soy)}
+.strip{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;padding:0 var(--gutter) .55rem;max-width:72rem;margin:0 auto}
+.strip a{display:block;height:5px;background:var(--line);border-radius:2px;position:relative}
+.strip a::after{content:"";position:absolute;inset:-8px 0}
+.strip a.done{background:var(--soy-2)}
+.strip a.now{background:var(--gold)}
+
+/* ---------- hero ---------- */
+.hero{max-width:72rem;margin:0 auto;padding:clamp(3rem,10vh,7rem) var(--gutter) 3rem}
+.hero-kicker{font-family:var(--sans);font-size:.9375rem;color:var(--soy-2);margin:0 0 1.5rem;max-width:36rem}
+.claim{
+  font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,8.4vw,6.4rem);
+  line-height:1.02;letter-spacing:-.022em;margin:0;max-width:16ch;
+  transition:color .7s ease;
+}
+.claim .q{color:var(--soy-2);font-weight:400}
+body[data-stance="dogmatist"] .claim{color:var(--chilli)}
+body[data-stance="academic"] .claim{color:var(--ink)}
+body[data-stance="pyrrhonist"] .claim{color:var(--cucumber)}
+.claim-strike{position:relative;display:inline}
+.ask{font-size:1.25rem;margin:2.25rem 0 1rem;font-style:italic}
+.answers{display:flex;flex-wrap:wrap;gap:.75rem;max-width:48rem}
+.answer{
+  font:500 1rem/1.25 var(--sans);text-align:left;cursor:pointer;
+  background:var(--rice);color:var(--soy);border:1.5px solid var(--soy);
+  padding:.85rem 1.1rem;border-radius:.5rem;flex:1 1 13rem;
+}
+.answer:hover{background:var(--rice-2)}
+.answer[aria-pressed="true"][data-s="dogmatist"]{background:var(--chilli);border-color:var(--chilli);color:#fff}
+.answer[aria-pressed="true"][data-s="academic"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.answer[aria-pressed="true"][data-s="pyrrhonist"]{background:var(--cucumber);border-color:var(--cucumber);color:#fff}
+.verdict{max-width:var(--measure);margin-top:1.75rem;min-height:1px}
+.verdict p{margin:.25rem 0}
+.verdict .who{font-size:1.5rem;font-weight:500;line-height:1.25}
+.verdict .who.dogmatist{color:var(--chilli)}
+.verdict .who.academic{color:var(--ink)}
+.verdict .who.pyrrhonist{color:var(--cucumber)}
+.verdict-in{animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.verdict-in{animation:none}.claim{transition:none}}
+.how{
+  max-width:72rem;margin:0 auto;padding:0 var(--gutter) 2rem;
+}
+.how p{max-width:var(--measure);font-family:var(--sans);font-size:.9375rem;color:var(--soy-2);margin:0;padding-top:1.25rem;border-top:1px solid var(--line)}
+
+/* ---------- parts ---------- */
+.part{max-width:72rem;margin:0 auto;padding:4.5rem var(--gutter) 1rem;display:grid;grid-template-columns:minmax(0,1fr);column-gap:3rem}
+@media (min-width:64rem){.part{grid-template-columns:minmax(0,var(--measure)) minmax(0,15rem);padding-left:clamp(2.5rem,8vw,8rem)}}
+.part > *{grid-column:1}
+.part-head{margin-bottom:1.25rem}
+.part-no{font-family:var(--sans);font-size:.875rem;font-weight:600;color:var(--soy-2);margin:0 0 .5rem}
+.part-no .scene{font-weight:400}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,5vw,2.85rem);line-height:1.08;letter-spacing:-.015em;margin:0}
+.bite{
+  font-size:1.3rem;line-height:1.45;margin:1.25rem 0 1.5rem;padding:1rem 1.15rem;
+  background:var(--ginger-soft);border-left:3px solid var(--soy);
+}
+@media (min-width:48rem){.bite{font-size:1.4rem}}
+.bite strong{font-weight:600}
+h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;line-height:1.25;margin:2.25rem 0 .5rem}
+p{margin:0 0 1rem}
+.part ul,.part ol{padding-left:1.25rem;margin:0 0 1rem}
+.part li{margin:.25rem 0}
+.aside{
+  font-size:1rem;line-height:1.55;color:var(--soy-2);margin:1rem 0 1.25rem;
+  padding-left:1rem;border-left:1px solid var(--line);
+}
+.aside b{color:var(--soy);font-weight:600}
+blockquote{margin:1.25rem 0;padding:0 0 0 1.25rem;border-left:3px solid var(--cucumber);font-size:1.2rem;line-height:1.5;font-style:italic}
+blockquote footer{font-style:normal;font-family:var(--sans);font-size:.875rem;color:var(--soy-2);margin-top:.5rem}
+.cite{font-family:var(--sans);font-size:.8125rem;color:var(--soy-2);white-space:nowrap}
+.flow{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem;margin:1.25rem 0;
+  font-family:var(--sans);font-size:.9375rem;
+}
+.flow span.step{border:1.5px solid var(--soy);border-radius:999px;padding:.35rem .8rem}
+.flow span.step.end{background:var(--cucumber);border-color:var(--cucumber);color:#fff}
+.flow span.to{color:var(--soy-2)}
+
+/* details = deeper layer */
+details.deep{border-top:1px solid var(--line);margin:0}
+details.deep:last-of-type{border-bottom:1px solid var(--line)}
+details.deep > summary{
+  list-style:none;cursor:pointer;padding:1rem 2rem 1rem 0;position:relative;
+  font-family:var(--serif);font-size:1.2rem;font-weight:500;line-height:1.3;
+}
+details.deep > summary::-webkit-details-marker{display:none}
+details.deep > summary::after{
+  content:"";position:absolute;right:.25rem;top:50%;width:.6rem;height:.6rem;margin-top:-.4rem;
+  border-right:1.5px solid var(--soy);border-bottom:1.5px solid var(--soy);transform:rotate(45deg);transition:transform .2s ease
+}
+details.deep[open] > summary::after{transform:rotate(-135deg);margin-top:-.1rem}
+details.deep > summary .hint{display:block;font-family:var(--sans);font-size:.8125rem;font-weight:400;color:var(--soy-2);margin-top:.15rem}
+details.deep > .inner{padding:0 0 1.25rem}
+details.deep > .inner > h3:first-child{margin-top:.25rem}
+
+/* comparison tables */
+.compare{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:1rem;line-height:1.45}
+.compare caption{text-align:left;font-family:var(--sans);font-size:.875rem;color:var(--soy-2);padding-bottom:.5rem}
+.compare th,.compare td{text-align:left;vertical-align:top;padding:.65rem .75rem .65rem 0;border-bottom:1px solid var(--line)}
+.compare thead th{font-family:var(--sans);font-size:.8125rem;font-weight:600;color:var(--soy-2);border-bottom:1.5px solid var(--soy)}
+.compare tbody th{font-weight:600}
+.dot{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;margin-right:.45rem;vertical-align:.1em}
+.dot.d{background:var(--chilli)}.dot.a{background:var(--ink)}.dot.p{background:var(--cucumber)}
+@media (max-width:40rem){
+  .compare caption{display:block;width:100%}
+  .compare thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .compare,.compare tbody,.compare tr,.compare th,.compare td{display:block;width:100%}
+  .compare tr{border-bottom:1px solid var(--line);padding:.75rem 0}
+  .compare tbody th{border:0;padding:0 0 .35rem;font-size:1.05rem}
+  .compare td{border:0;padding:.2rem 0}
+  .compare td::before{content:attr(data-label);display:block;font-family:var(--sans);font-size:.75rem;font-weight:600;color:var(--soy-2)}
+}
+
+/* margin notes */
+.margin{font-family:var(--sans);font-size:.8125rem;line-height:1.5;color:var(--soy-2);margin:.5rem 0 1rem}
+@media (min-width:64rem){
+  .margin{grid-column:2;grid-row:auto;align-self:start;margin:0;position:sticky;top:6rem;border-top:1.5px solid var(--soy);padding-top:.6rem}
+  .part > .margin{grid-row:1 / span 3}
+}
+.margin b{color:var(--soy);font-weight:600}
+
+/* ---------- interactives (shared) ---------- */
+.lab{
+  margin:2rem 0 1.5rem;padding:1.5rem;border:1.5px solid var(--soy);border-radius:.75rem;background:#fff;
+}
+@media (min-width:48rem){.lab{padding:2rem}}
+.lab-title{font-family:var(--sans);font-size:.875rem;font-weight:600;margin:0 0 .25rem}
+.lab-sub{font-family:var(--sans);font-size:.875rem;color:var(--soy-2);margin:0 0 1.25rem}
+.btn{
+  font:600 .9375rem/1 var(--sans);cursor:pointer;border-radius:.5rem;padding:.8rem 1.1rem;
+  border:1.5px solid var(--gold);background:var(--gold);color:var(--soy)
+}
+.btn.ghost{background:transparent;color:var(--soy);border-color:var(--soy)}
+.btn:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+.btn.ghost:hover{background:var(--rice-2);filter:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+
+/* why chain */
+.chain{list-style:none;margin:0;padding:0;position:relative}
+.chain li{position:relative;padding:.1rem 0 1rem 1.6rem}
+.chain li::before{content:"";position:absolute;left:.3rem;top:.55rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--soy)}
+.chain li::after{content:"";position:absolute;left:.55rem;top:1.15rem;bottom:0;width:1px;background:var(--line)}
+.chain li.claim-line{font-size:1.25rem;font-weight:500}
+.chain li.claim-line::before{background:var(--gold);box-shadow:0 0 0 1.5px var(--soy);width:.7rem;height:.7rem;left:.22rem;top:.5rem}
+.chain li.why{font-family:var(--sans);font-size:.875rem;color:var(--soy-2);padding-bottom:.6rem}
+.chain li.why::before{background:transparent;border:1.5px solid var(--soy-2)}
+.chain li.reason{animation:rise .35s ease both}
+@media (prefers-reduced-motion: reduce){.chain li.reason{animation:none}}
+.exits{display:grid;gap:.6rem;margin-top:.5rem}
+@media (min-width:40rem){.exits{grid-template-columns:repeat(3,1fr)}}
+.exit{
+  font:500 .9375rem/1.3 var(--sans);text-align:left;cursor:pointer;padding:.85rem 1rem;border-radius:.5rem;
+  border:1.5px solid var(--soy);background:var(--rice);color:var(--soy)
+}
+.exit:hover{background:var(--ginger-soft)}
+.exit small{display:block;font-weight:400;color:var(--soy-2);margin-top:.25rem;font-size:.8125rem}
+.trap{margin-top:1.25rem;padding:1.1rem 1.2rem;background:var(--ginger-soft);border-radius:.5rem}
+.trap h4{font-family:var(--serif);font-size:1.3rem;font-weight:600;margin:0 0 .35rem}
+.trap p{font-size:1.05rem;margin:0 0 .6rem}
+
+/* ten modes */
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:1rem 0 .5rem}
+@media (min-width:48rem){.modes{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.mode-card{
+  position:relative;min-height:11.5rem;perspective:900px;border:0;padding:0;background:none;cursor:pointer;
+  font:inherit;color:inherit;text-align:left;
+}
+.mode-card .face{
+  position:absolute;inset:0;border-radius:.6rem;padding:.85rem .9rem;display:flex;flex-direction:column;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.mode-card .front{background:var(--rice);border:1.5px solid var(--soy)}
+.mode-card .back{background:var(--soy);color:var(--rice);transform:rotateY(180deg);border:1.5px solid var(--soy);box-shadow:inset 0 6px 0 var(--gold)}
+.mode-card[aria-pressed="true"] .front{transform:rotateY(-180deg)}
+.mode-card[aria-pressed="true"] .back{transform:rotateY(0)}
+.mode-card .n{font-family:var(--serif);font-size:2.4rem;line-height:1;font-weight:500}
+.mode-card .name{font-family:var(--sans);font-weight:600;font-size:.9375rem;line-height:1.25;margin-top:.9rem}
+.mode-card .idea{font-family:var(--sans);font-size:.8125rem;line-height:1.35;color:var(--soy-2);margin-top:.3rem}
+@media (min-width:48rem){
+  .mode-card{min-height:12rem}
+  .mode-card .face{padding:.8rem .75rem}
+  .mode-card .name{font-size:.8125rem}
+}
+@media (min-width:64rem){
+  #modesLab{grid-column:1 / -1}
+  #p5 > .margin{position:static}
+  .mode-card{min-height:10.5rem}
+  .mode-card .name{font-size:.9375rem}
+}
+.mode-card .back .eg{font-family:var(--serif);font-size:1.02rem;line-height:1.35;font-style:italic}
+.mode-card .back .tag{font-family:var(--sans);font-size:.75rem;opacity:.75;margin-top:auto}
+@media (prefers-reduced-motion: reduce){
+  .mode-card .face{transition:none}
+  .mode-card .back{transform:none;opacity:0}
+  .mode-card[aria-pressed="true"] .front{transform:none;opacity:0}
+  .mode-card[aria-pressed="true"] .back{opacity:1}
+}
+.modes-note{font-family:var(--sans);font-size:.875rem;color:var(--soy-2)}
+
+/* quiz */
+.quiz-q{font-size:1.35rem;line-height:1.35;font-weight:500;margin:0 0 1rem}
+.quiz-opts{display:grid;gap:.55rem}
+.quiz-opt{
+  font:500 1rem/1.35 var(--sans);text-align:left;cursor:pointer;padding:.85rem 1rem;border-radius:.5rem;
+  border:1.5px solid var(--soy);background:var(--rice);color:var(--soy)
+}
+.quiz-opt:hover{background:var(--ginger-soft)}
+.quiz-meta{font-family:var(--sans);font-size:.8125rem;color:var(--soy-2);margin:0 0 .75rem}
+.quiz-bars{display:grid;gap:.5rem;margin:1rem 0}
+.qbar{display:grid;grid-template-columns:7.5rem 1fr 1.5rem;align-items:center;gap:.6rem;font-family:var(--sans);font-size:.875rem}
+.qbar .track{display:block;height:.6rem;background:var(--rice-2);border-radius:999px;overflow:hidden}
+.qbar .fill{display:block;height:100%;border-radius:999px;transition:width .6s ease}
+@media (prefers-reduced-motion: reduce){.qbar .fill{transition:none}}
+.result-name{font-size:1.75rem;font-weight:500;line-height:1.2;margin:0 0 .5rem}
+
+/* glossary + refs */
+.gloss{display:grid;grid-template-columns:1fr;margin:1rem 0}
+.gloss dt{font-weight:600;padding-top:.75rem;border-top:1px solid var(--line)}
+.gloss dd{margin:0 0 .75rem;font-size:1rem;color:var(--soy)}
+@media (min-width:40rem){
+  .gloss{grid-template-columns:12rem 1fr;column-gap:1.25rem}
+  .gloss dt,.gloss dd{padding:.7rem 0;border-top:1px solid var(--line);margin:0}
+}
+.refs{font-size:1rem;line-height:1.5;padding-left:0;list-style:none}
+.refs li{margin:0 0 .75rem;padding-left:1.5rem;text-indent:-1.5rem}
+
+footer.end{max-width:72rem;margin:4rem auto 0;padding:2.5rem var(--gutter) 4rem;border-top:1px solid var(--line);font-family:var(--sans);font-size:.875rem;color:var(--soy-2)}
+footer.end p{max-width:var(--measure)}
+.closing{font-family:var(--serif);font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;letter-spacing:-.015em;color:var(--cucumber);margin:2rem 0 1rem;max-width:18ch}
+</style>
+</head>
+<body>
+
+<header class="bar" aria-label="Reading progress and mode">
+  <div class="bar-inner">
+    <p class="bar-title" id="barTitle"><b>Suspend judgement, eat rice</b></p>
+    <div class="mode" role="group" aria-label="Reading depth">
+      <button type="button" id="quickBtn" aria-pressed="true">Quick read</button>
+      <button type="button" id="fullBtn" aria-pressed="false">Full depth</button>
+    </div>
+  </div>
+  <nav class="strip" id="strip" aria-label="Jump to a part"></nav>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="claim">
+  <p class="hero-kicker">The notes behind our SP0001 skit on Pyrrhonian skepticism. Start here, then scroll at your own pace.</p>
+  <h1 class="claim" id="claim">“This is the best chicken rice in Singapore.”</h1>
+  <p class="ask">Your honest reaction?</p>
+  <div class="answers" role="group" aria-label="Your reaction">
+    <button type="button" class="answer" data-s="dogmatist" aria-pressed="false">Obviously. Mine is, and I can prove it.</button>
+    <button type="button" class="answer" data-s="academic" aria-pressed="false">Nobody can ever know which one is best.</button>
+    <button type="button" class="answer" data-s="pyrrhonist" aria-pressed="false">It tastes great to me. Still deciding.</button>
+  </div>
+  <div class="verdict" id="verdict" aria-live="polite"></div>
+</section>
+
+<div class="how"><p>Each part opens with the short version. Tap any heading underneath to go deeper, or switch to <b>Full depth</b> at the top to open everything. References like <span class="gr">PH</span> 1.8 point to Sextus Empiricus, <span class="gr">Outlines of Pyrrhonism</span>, Book 1, section 8. “Bett” page numbers point to our set reading.</p></div>
+
+<!-- ================= PART 1 ================= -->
+<section class="part" id="p1" data-title="The three stances">
+  <div class="part-head">
+    <p class="part-no">Part 1<span class="scene">: from the opening argument</span></p>
+    <h2>Found it, can’t be found, or still looking</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>Two Dogmatists fight over whose packet is better. The Academic says nobody can know. The Pyrrhonist, in a posh accent, suspends judgement and keeps eating.</aside>
+  <p class="bite"><strong>The short version.</strong> Sextus says every search ends in one of three ways. You think you’ve found the answer, you declare it can’t be found, or you keep looking. Only the third is the skeptic.</p>
+
+  <table class="compare">
+    <caption>The three stances, as Sextus lays them out (<span class="gr">PH</span> 1.1–4)</caption>
+    <thead><tr><th scope="col">Stance</th><th scope="col">What they claim</th><th scope="col">Sextus’s examples</th><th scope="col">In our skit</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><span class="dot d" aria-hidden="true"></span>Dogmatist</th><td data-label="What they claim">“I have found the truth.”</td><td data-label="Sextus’s examples">Aristotle, Epicurus, the Stoics</td><td data-label="In our skit">The two hawkers: “Mine is the best!”</td></tr>
+      <tr><th scope="row"><span class="dot a" aria-hidden="true"></span>Academic Skeptic</th><td data-label="What they claim">“The truth cannot be found.”</td><td data-label="Sextus’s examples">Clitomachus, Carneades</td><td data-label="In our skit">“Nobody can ever know which one is best!”</td></tr>
+      <tr><th scope="row"><span class="dot p" aria-hidden="true"></span>Pyrrhonian Skeptic</th><td data-label="What they claim">“I’m still looking.”</td><td data-label="Sextus’s examples">The Pyrrhonists</td><td data-label="In our skit">“I suspend judgement.”</td></tr>
+    </tbody>
+  </table>
+
+  <details class="deep">
+    <summary>Why the Academic is a dogmatist pointing the other way<span class="hint">Negative dogmatism</span></summary>
+    <div class="inner">
+      <p>The Academic sounds humble, but “knowledge is impossible” is itself a confident claim about knowledge. To know that nobody can know which chicken rice is best, you’d need to know a great deal about the limits of taste, evidence and human minds. So Sextus treats it as another form of dogmatism. Modern scholars call it <b>negative dogmatism</b>, though Bett notes this isn’t a term Sextus himself uses <span class="cite">(Bett, p. 404)</span>.</p>
+      <p class="aside"><b>For the curious.</b> Whether the historical Academics really held this firm view is disputed. Bett says Sextus links it to the Academics “rightly or wrongly” <span class="cite">(p. 404)</span>, and some ancient sources suggest they too avoided committing to anything. Sextus’s picture is partly a contrast that helps define the Pyrrhonist <span class="cite">(<span class="gr">PH</span> 1.220–235)</span>.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>What a Pyrrhonist actually is<span class="hint">An ability, not a doctrine</span></summary>
+    <div class="inner">
+      <p>The word <span class="gr">skeptikos</span> means “inquirer”: someone who keeps examining <span class="cite">(Bett, p. 404)</span>. The Pyrrhonists also called themselves searchers, suspenders and the puzzled <span class="cite">(<span class="gr">PH</span> 1.7)</span>. Sextus’s definition is one of the most important sentences he wrote:</p>
+      <blockquote>The skeptical ability is one that produces oppositions among things that appear and things that are thought in any way whatsoever, one from which, because of the equal strength in the opposing objects and accounts, we come first to suspension of judgement, and after that to tranquility.<footer><span class="gr">PH</span> 1.8, as quoted by Bett, p. 404</footer></blockquote>
+      <table class="compare">
+        <caption>Four terms from that sentence</caption>
+        <thead><tr><th scope="col">Greek</th><th scope="col">Meaning</th><th scope="col">Chicken rice version</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><span class="gr">dunamis</span></th><td data-label="Meaning">An ability: a way of doing things, not a theory</td><td data-label="Chicken rice version">A way of handling chicken rice debates, not a rival opinion about chicken rice</td></tr>
+          <tr><th scope="row"><span class="gr">isostheneia</span></th><td data-label="Meaning">Equal strength: both sides seem equally convincing</td><td data-label="Chicken rice version">Stall A’s chicken is juicier, Stall B’s rice is more fragrant. Neither wins outright.</td></tr>
+          <tr><th scope="row"><span class="gr">epoché</span></th><td data-label="Meaning">Suspension of judgement: the mind neither affirms nor denies (<span class="gr">PH</span> 1.10)</td><td data-label="Chicken rice version">“I won’t say which is best.”</td></tr>
+          <tr><th scope="row"><span class="gr">ataraxia</span></th><td data-label="Meaning">Tranquillity: freedom from mental disturbance</td><td data-label="Chicken rice version">No more lying awake defending your stall</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>The Pyrrhonist doesn’t doubt the taste<span class="hint">Appearances vs how things really are</span></summary>
+    <div class="inner">
+      <p>A common misunderstanding: the Pyrrhonist does not deny that things appear as they do. Sextus’s own example is honey <span class="cite">(<span class="gr">PH</span> 1.19–20)</span>. He accepts that honey <i>appears</i> sweet to him. What he investigates is whether honey <i>is</i> sweet by its nature.</p>
+      <p>So in the skit, the Pyrrhonist can happily say the chicken <i>appears</i> succulent. That’s a report of experience, and he goes along with it. What he suspends judgement on is the further claim that it <i>is</i> the best by nature.</p>
+      <p>Sextus also says the skeptic accepts feelings forced on him: when he’s hot, he won’t insist he isn’t hot. What he avoids is assent to <b>non-evident</b> matters, the hidden truths that philosophers and scientists argue about <span class="cite">(<span class="gr">PH</span> 1.13)</span>.</p>
+      <p class="aside"><b>For the curious.</b> How much does the skeptic believe? Does he suspend only on deep theories and keep everyday beliefs (“there is a table in front of me”), or does he suspend on those too, keeping only the bare feel of his experience? Bett notes that Sextus’s “on the side of ordinary life” stance suggests the first, but that this isn’t consistently sustained <span class="cite">(Bett, p. 406)</span>. Scholars call this the debate between “urbane” and “rustic” readings.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 2 ================= -->
+<section class="part" id="p2" data-title="Is this chicken rice even real?">
+  <div class="part-head">
+    <p class="part-no">Part 2<span class="scene">: from the 1-to-10 poll</span></p>
+    <h2>Is this chicken rice even real?</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>We asked how sure you are that the chicken rice exists, then took a very small bite to “test” it.</aside>
+  <p class="bite"><strong>The short version.</strong> Bostrom doesn’t claim we’re in a simulation. He argues that at least one of three possibilities must be true, and one of them is that we are. Tasting the rice can’t settle it, because the taste could be simulated too.</p>
+
+  <details class="deep">
+    <summary>Bostrom’s argument, step by step<span class="hint">Why you can’t comfortably reject all three</span></summary>
+    <div class="inner">
+      <p>Nick Bostrom (2003, “Are You Living in a Computer Simulation?”) argues that at least one of these is very likely true:</p>
+      <ol>
+        <li>Almost all civilisations at our stage die out before they become technologically mature, meaning able to run detailed simulations of minds.</li>
+        <li>Almost no technologically mature civilisations are interested in running such simulations, for example of their own ancestors.</li>
+        <li>We are almost certainly living in a simulation.</li>
+      </ol>
+      <p>Suppose you reject (1) and (2). Then many civilisations survive, and many of them run huge numbers of simulations, so simulated minds vastly outnumber real ones. If you can’t tell which kind of mind you are, Bostrom says you should spread your confidence evenly across all minds with experiences like yours (his “bland indifference principle”). On those numbers you’re probably simulated. So rejecting (3) commits you to (1) or (2).</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>What makes something a skeptical hypothesis<span class="hint">Dreams, demons, vats and simulations</span></summary>
+    <div class="inner">
+      <p>A skeptical hypothesis is a scenario that would make many of your everyday beliefs false and would feel exactly like normal life from the inside. Famous examples:</p>
+      <ul>
+        <li><b>Descartes’s dream</b> (<span class="gr">Meditations</span>, 1641): am I sure I’m not dreaming this hawker centre?</li>
+        <li><b>Descartes’s evil demon</b>: a powerful deceiver could be feeding me false experiences.</li>
+        <li><b>The brain in a vat</b>: a scientist stimulates a disembodied brain.</li>
+        <li><b>Bostrom’s simulation</b>: the computing version.</li>
+      </ul>
+      <p>Why the bite didn’t help: every test you could run, whether tasting, smelling or asking the uncle, happens <i>inside</i> the scenario you’re trying to rule out. Simulated chicken rice would pass every test.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>A historical twist<span class="hint">The ancients didn’t doubt the whole world</span></summary>
+    <div class="inner">
+      <p>As far as we can tell, the ancient Pyrrhonists didn’t use whole-world scenarios like these. Doubting the external world as a whole is a mostly modern, Cartesian worry; the classicist Myles Burnyeat famously argued this. Ancient skeptics worked case by case: does this honey really taste sweet, is this tower really round? Bett also stresses that Pyrrhonism “differs in multiple ways from Cartesian skepticism” <span class="cite">(p. 403)</span>, which is where Part 3 picks up.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 3 ================= -->
+<section class="part" id="p3" data-title="Two kinds of doubt">
+  <div class="part-head">
+    <p class="part-no">Part 3<span class="scene">: from “got use fresh chicken or not?”</span></p>
+    <h2>Everyday doubt, deep doubt, and two pictures of one plate</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>An argument about frozen chicken, a sudden lecture on protein percentages, and a demand to “give me a reason”.</aside>
+  <p class="bite"><strong>The short version.</strong> Ordinary doubt checks one claim and can be settled. Philosophical doubt questions the basis of knowledge itself. Descartes uses it to reach certainty; the Pyrrhonist lives with it.</p>
+
+  <details class="deep">
+    <summary>Ordinary doubt<span class="hint">Local, reasoned, settleable</span></summary>
+    <div class="inner">
+      <ul>
+        <li><b>It’s local:</b> it targets one specific claim.</li>
+        <li><b>It has a reason:</b> “the colour doesn’t look right.”</li>
+        <li><b>It can be settled:</b> ask the stall owner, check the reviews, taste it.</li>
+      </ul>
+      <p>“Is your chicken fresh or frozen?” is ordinary doubt. It works entirely within everyday life.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>The manifest image and the scientific image<span class="hint">Sellars’s two pictures of the world</span></summary>
+    <div class="inner">
+      <p>Wilfrid Sellars (“Philosophy and the Scientific Image of Man”, 1962) described two ways of picturing the world.</p>
+      <table class="compare">
+        <thead><tr><th scope="col"></th><th scope="col">Manifest image</th><th scope="col">Scientific image</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">What it is</th><td data-label="Manifest image">The world as we ordinarily experience it: people, objects, colours, tastes</td><td data-label="Scientific image">The world as the sciences describe it: molecules, proteins, cells, fields</td></tr>
+          <tr><th scope="row">Chicken rice</th><td data-label="Manifest image">“Juicy, fragrant, a bit spicy”</td><td data-label="Scientific image">“About 20–24% protein, small amounts of lipid…”</td></tr>
+          <tr><th scope="row">Who uses it</th><td data-label="Manifest image">Everyone, every day</td><td data-label="Scientific image">Scientists, in theory</td></tr>
+        </tbody>
+      </table>
+      <p>Both describe the same plate in completely different terms. How they fit together is one of philosophy’s big questions. Sellars himself leaned towards the scientific image on what really exists (“science is the measure of all things”), while holding that the manifest image is indispensable for people and their purposes.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Cartesian doubt vs Pyrrhonian doubt<span class="hint">A threat to defeat, or an outlook to live with</span></summary>
+    <div class="inner">
+      <p>Bett puts the contrast sharply: for Descartes, skepticism is “a threat to be warded off”; for the Pyrrhonists, “an outlook to be embraced” <span class="cite">(p. 403)</span>.</p>
+      <table class="compare">
+        <thead><tr><th scope="col"></th><th scope="col">Cartesian doubt</th><th scope="col">Pyrrhonian doubt</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Source</th><td data-label="Cartesian doubt">René Descartes, <span class="gr">Meditations</span> (1641)</td><td data-label="Pyrrhonian doubt">Pyrrho of Elis (c. 360–270 BCE), as developed by Aenesidemus and recorded by Sextus</td></tr>
+          <tr><th scope="row">Attitude</th><td data-label="Cartesian doubt">A tool to get rid of uncertainty</td><td data-label="Pyrrhonian doubt">A way of life</td></tr>
+          <tr><th scope="row">Method</th><td data-label="Cartesian doubt">Doubt everything that could be false, to find something certain</td><td data-label="Pyrrhonian doubt">Set opposing arguments against each other</td></tr>
+          <tr><th scope="row">Goal</th><td data-label="Cartesian doubt">Certainty (“I think, therefore I am”)</td><td data-label="Pyrrhonian doubt">Tranquillity (<span class="gr">ataraxia</span>)</td></tr>
+          <tr><th scope="row">Chicken rice</th><td data-label="Cartesian doubt">“Give me a reason! Prove it, or I reject it.”</td><td data-label="Pyrrhonian doubt">“Today buy from her, tomorrow buy from him.”</td></tr>
+        </tbody>
+      </table>
+      <p>In short: Descartes doubts in order to stop doubting. The Pyrrhonist doubts and finds he no longer needs to stop.</p>
+      <p class="aside"><b>For the curious.</b> Bett adds that Pyrrhonism isn’t specially about epistemology at all. Sextus applies the same method to physics, ethics, grammar and astrology. In Bett’s words, it “is about epistemology; it is not a position within epistemology” <span class="cite">(p. 407)</span>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 4 ================= -->
+<section class="part" id="p4" data-title="Living by appearances">
+  <div class="part-head">
+    <p class="part-no">Part 4<span class="scene">: from “when they feel hungry, they just eat”</span></p>
+    <h2>How does a skeptic get out of bed?</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>The Pyrrhonist doesn’t need to judge whether chicken rice is objectively good. Hungry? Eat.</aside>
+  <p class="bite"><strong>The short version.</strong> The skeptic acts on how things seem, not on beliefs about how they really are. Hunger, habit, custom and skill are enough to get through the day.</p>
+
+  <details class="deep">
+    <summary>The objection: a life without beliefs is impossible<span class="hint">The ancient apraxia charge</span></summary>
+    <div class="inner">
+      <p>If the Pyrrhonist suspends judgement on everything, how does he decide anything? This “inaction” (<span class="gr">apraxia</span>) objection was “standardly leveled against skeptics in antiquity” <span class="cite">(Bett, p. 406)</span>. Later anecdotes even joked that Pyrrho had to be saved by friends from carts and cliffs, though these are probably caricatures.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Sextus’s answer: the fourfold guide to life<span class="hint"><span class="gr">PH</span> 1.21–24</span></summary>
+    <div class="inner">
+      <p>It’s quite possible, Sextus replies, to act in light of how things strike you without taking a stand on whether they really are that way <span class="cite">(Bett, p. 406)</span>. His guide has four parts:</p>
+      <ol>
+        <li><b>Guidance of nature:</b> we can naturally perceive and think.</li>
+        <li><b>The pressure of feelings:</b> hunger leads us to food, thirst to drink.</li>
+        <li><b>Laws and customs:</b> we follow the practices of our society.</li>
+        <li><b>Teaching of skills:</b> we practise the crafts we’ve been taught.</li>
+      </ol>
+      <p>So the hungry Pyrrhonist walks to the hawker centre and eats. No theory of which chicken rice is objectively best, or of what flavour “really” is, is needed.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>A later challenge: Hume<span class="hint">“Nature is always too strong for principle”</span></summary>
+    <div class="inner">
+      <p>David Hume thought radical skepticism couldn’t survive real life: “nature is always too strong for principle” (<span class="gr">Enquiry</span>, 1748, Section 12). Leave the study, get hungry, and your doubts vanish. A Pyrrhonist might reply that Hume is agreeing with him: that’s exactly why the skeptic follows nature and appearances rather than theory.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 5 ================= -->
+<section class="part" id="p5" data-title="The Modes">
+  <div class="part-head">
+    <p class="part-no">Part 5<span class="scene">: the skeptic’s toolkit</span></p>
+    <h2>The Modes: ready-made ways to balance an argument</h2>
+  </div>
+  <aside class="margin"><b>Where these come from</b><br>The Ten Modes are attributed to Aenesidemus (1st century BCE), the Five to the otherwise unknown Agrippa <span class="cite">(Bett, p. 409)</span>.</aside>
+  <p class="bite"><strong>The short version.</strong> The Modes are standard argument patterns for producing “equal strength”. The Ten show that the same thing appears differently in different conditions. The Five work against any claim at all.</p>
+
+  <div class="lab" id="modesLab">
+    <p class="lab-title">The Ten Modes, on a plate</p>
+    <p class="lab-sub">Tap a card to flip it and see the chicken rice version.</p>
+    <div class="modes" id="modes"></div>
+    <p class="modes-note">Sextus says all ten come down to relativity in the end (<span class="gr">PH</span> 1.39).</p>
+  </div>
+
+  <details class="deep">
+    <summary>The Five Modes<span class="hint">The general-purpose set (<span class="gr">PH</span> 1.165–169)</span></summary>
+    <div class="inner">
+      <p>In the order Sextus introduces them <span class="cite">(Bett, p. 408)</span>:</p>
+      <ol>
+        <li><b>Undecidable dispute:</b> people disagree, and the disagreement can’t be settled.</li>
+        <li><b>Infinite regress:</b> every reason needs a further reason, forever.</li>
+        <li><b>Relativity:</b> things appear only relative to someone or something.</li>
+        <li><b>Hypothesis:</b> you stop the chain by simply assuming something.</li>
+        <li><b>Circularity:</b> your reason relies on the very thing you’re trying to prove.</li>
+      </ol>
+      <p>The Ten and the Five are two separate sets. Sextus says the Ten are older, so the Five must have been developed in the two centuries or more between Aenesidemus and Sextus himself <span class="cite">(Bett, p. 409)</span>. Bett also notes that Relativity “sits awkwardly” among the Five; the other four fit together much better <span class="cite">(p. 408)</span>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 6 ================= -->
+<section class="part" id="p6" data-title="The why? trap">
+  <div class="part-head">
+    <p class="part-no">Part 6<span class="scene">: from the audience “why?” chain</span></p>
+    <h2>The “why?” trap</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>We kept asking you why, until someone slapped the table: “Because I say so!”</aside>
+  <p class="bite"><strong>The short version.</strong> Keep asking “why?” and any defence of a claim ends in one of three places: reasons forever, reasons in a circle, or a reason you just assume. Today this is called Agrippa’s trilemma.</p>
+
+  <div class="lab" id="whyLab">
+    <p class="lab-title">Try it yourself</p>
+    <p class="lab-sub">Defend the claim. Each time you’re asked why, give the next reason.</p>
+    <ol class="chain" id="chain"></ol>
+    <div id="whyControls"></div>
+    <div id="whyResult" aria-live="polite"></div>
+  </div>
+
+  <details class="deep">
+    <summary>The three exits, and why each one fails<span class="hint"><span class="gr">PH</span> 1.171–174</span></summary>
+    <div class="inner">
+      <table class="compare">
+        <thead><tr><th scope="col">Exit</th><th scope="col">What happens</th><th scope="col">Chicken rice version</th><th scope="col">Why it fails</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Infinite regress</th><td data-label="What happens">Reasons go on forever</td><td data-label="Chicken rice version">“Because the chilli is balanced.” “Why?” “Because…”</td><td data-label="Why it fails">The justification is never finished</td></tr>
+          <tr><th scope="row">Circularity</th><td data-label="What happens">The reason assumes the conclusion</td><td data-label="Chicken rice version">“It’s the best because it tastes best.”</td><td data-label="Why it fails">You’ve assumed what you were proving</td></tr>
+          <tr><th scope="row">Hypothesis (“the parent slam”)</th><td data-label="What happens">You just stop</td><td data-label="Chicken rice version">“Because I say so!” <i>(slaps table)</i></td><td data-label="Why it fails">Sextus treats this as arbitrary: you could just as well have assumed something else</td></tr>
+        </tbody>
+      </table>
+      <p>Bett points out this is only the beginning of an argument. Many would deny these are the only three options. Aristotle, for example, would dispute that starting-points which need no further justification are merely arbitrary “hypotheses” <span class="cite">(Bett, p. 408)</span>. The name “Agrippan trilemma” is modern and has become widespread in recent epistemology <span class="cite">(p. 411)</span>.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>What the trilemma does not show<span class="hint">Not “truth is impossible”</span></summary>
+    <div class="inner">
+      <p>It’s tempting to say the trilemma proves “truth is impossible” or “nothing can be justified”, which is exactly what the Academic in our skit would say. A Pyrrhonist shouldn’t, because that is negative dogmatism again. He only reports that so far, every attempt seems to hit one of these walls, so he suspends judgement and keeps going. (Whether Sextus himself always sticks to this is one of Bett’s criticisms; see Part 9.)</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Link to the course: the Prover–Skeptic game<span class="hint">Dutilh Novaes (2020)</span></summary>
+    <div class="inner">
+      <p>In Catarina Dutilh Novaes’s account of deduction, reasoning is a dialogue between a <b>Prover</b>, who tries to convince, and a <b>Skeptic</b>, who checks every step. One of the Skeptic’s moves is simply to ask “why does this follow?” <span class="cite">(<span class="gr">The Dialogical Roots of Deduction</span>, pp. 52–53)</span>.</p>
+      <p>The trilemma shows what happens if that “why?” never stops: the Prover runs out of good moves. Dutilh Novaes partly handles this by treating a Skeptic who questions <i>every</i> step, like Lewis Carroll’s Tortoise, as misusing the game. Workable games need some agreed moves that aren’t questioned <span class="cite">(pp. 58–59)</span>.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Where justification stops: Wittgenstein and Sellars<span class="hint">Shared practice and the space of reasons</span></summary>
+    <div class="inner">
+      <p>Ludwig Wittgenstein (<span class="gr">Philosophical Investigations</span>, 1953) argued that justification bottoms out in shared practice:</p>
+      <ul>
+        <li>Following a rule is a practice, not something one person can do privately (§202).</li>
+        <li>When reasons run out, “I have reached bedrock, and my spade is turned”, and I can only say “this is simply what I do” (§217).</li>
+        <li>Our agreement is ultimately agreement in a form of life (§241).</li>
+      </ul>
+      <p>The phrase “the space of reasons” comes from Sellars (“Empiricism and the Philosophy of Mind”, 1956, §36). It names the practice of giving and asking for reasons.</p>
+      <p>Applied to chicken rice: we can only argue about which stall is better because we already share standards. The rice shouldn’t be mushy, the chicken shouldn’t be dry, and the chilli shouldn’t taste like strawberries. In the skit, people picked different stalls but gave the same kinds of reasons.</p>
+      <p class="aside"><b>For the curious.</b> Robert Fogelin, who calls himself a neo-Pyrrhonist, sees a Pyrrhonist strand in Wittgenstein: philosophy as therapy, and philosophy as needing to come to an end. Bett notes that others question how useful this comparison really is <span class="cite">(Bett, p. 412)</span>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 7 ================= -->
+<section class="part" id="p7" data-title="Will the stall be good tomorrow?">
+  <div class="part-head">
+    <p class="part-no">Part 7<span class="scene">: going further</span></p>
+    <h2>Will the stall be good tomorrow?</h2>
+  </div>
+  <aside class="margin"><b>Connection</b><br>Hume’s “custom and habit” is a real-life version of the trilemma’s third exit.</aside>
+  <p class="bite"><strong>The short version.</strong> We trust that tomorrow’s chicken rice will be like today’s, but the only support for that trust is past experience, which is exactly what’s in question. Hume says we rely on habit, not proof.</p>
+
+  <details class="deep">
+    <summary>The queue dialogue<span class="hint">Hume’s problem of induction</span></summary>
+    <div class="inner">
+      <p><b>A:</b> I’m queueing again tomorrow. This stall will be great.<br>
+      <b>B:</b> Why?<br>
+      <b>A:</b> Because it’s been great every day for five years.<br>
+      <b>B:</b> Why does the past tell you about tomorrow?<br>
+      <b>A:</b> Because nature is uniform. Tomorrow will resemble today.<br>
+      <b>B:</b> Why believe nature is uniform?<br>
+      <b>A:</b> Because it always has been, every time we’ve checked.<br>
+      <b>B:</b> But that’s the past again. Why trust it for the future?</p>
+      <p>This is Hume’s problem of induction (<span class="gr">Enquiry</span>, Sections 4–5). Every argument from past to future relies on the assumption that the future will resemble the past, but that assumption can only be supported by past experience, so the reasoning goes in a circle. Hume concluded we rely on custom or habit: “Custom, then, is the great guide of human life.”</p>
+      <p>That’s one of the trilemma’s exits in real life: we stop at an assumption we can’t justify, and live by it anyway, much like the Pyrrhonist’s reliance on habit and custom (Part 4).</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 8 ================= -->
+<section class="part" id="p8" data-title="Tranquillity">
+  <div class="part-head">
+    <p class="part-no">Part 8<span class="scene">: from the cold box of rice</span></p>
+    <h2>Why suspend judgement at all?</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>One character spent 45 minutes building an airtight proof. His rice went cold. The other just ate.</aside>
+  <p class="bite"><strong>The short version.</strong> The skeptics went looking for truth to find peace of mind. They never found it, suspended judgement, and the peace arrived anyway.</p>
+
+  <div class="flow" aria-label="The Pyrrhonist sequence">
+    <span class="step">Opposing arguments</span><span class="to" aria-hidden="true">›</span>
+    <span class="step">Equal strength</span><span class="to" aria-hidden="true">›</span>
+    <span class="step">Suspension of judgement</span><span class="to" aria-hidden="true">›</span>
+    <span class="step end">Tranquillity</span>
+  </div>
+
+  <details class="deep">
+    <summary>The origin story, and Apelles’ sponge<span class="hint"><span class="gr">PH</span> 1.12, 1.26–29</span></summary>
+    <div class="inner">
+      <p>Sextus says the skeptic starts out as a normal philosopher, seeking tranquillity by discovering the truth. The attempt fails: every position meets an equally strong opposite. Unable to decide, he suspends judgement, and that very suspension brings the tranquillity he was hoping for <span class="cite">(<span class="gr">PH</span> 1.12, 26; Bett, p. 405)</span>. It follows “as a shadow follows a body” <span class="cite">(<span class="gr">PH</span> 1.29)</span>.</p>
+      <p>Sextus compares this to the painter Apelles, who couldn’t paint the foam on a horse’s mouth. In frustration he threw his sponge at the painting, and the mark it left looked exactly like foam <span class="cite">(<span class="gr">PH</span> 1.28)</span>.</p>
+      <p>Chicken rice version: the ancient skeptics went searching for the best chicken rice to finally have peace of mind. They never found it. When they stopped needing to know, the peace came anyway, and the rice was still warm.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>The goal: tranquillity and moderate feeling<span class="hint"><span class="gr">PH</span> 1.25–30</span></summary>
+    <div class="inner">
+      <ul>
+        <li><b>Tranquillity (<span class="gr">ataraxia</span>) in matters of opinion:</b> you’re no longer troubled about whether your stall is <i>really</i> the best.</li>
+        <li><b>Moderate feeling (<span class="gr">metriopatheia</span>) in what we can’t avoid:</b> you still feel hunger, but without the extra torment of believing hunger is objectively terrible.</li>
+      </ul>
+      <p>Bett observes that whenever Sextus explains <i>why</i> suspension brings peace, the focus is on dropping beliefs about what is really good or bad. Believe something is really good and you care desperately about getting or keeping it; shed that belief and “nothing matters to anything like the same extent” <span class="cite">(Bett, p. 405)</span>.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Tranquillity and the good life<span class="hint"><span class="gr">Ataraxia</span> and <span class="gr">eudaimonia</span></span></summary>
+    <div class="inner">
+      <p>Most ancient Greek philosophy asks how to live a flourishing life (<span class="gr">eudaimonia</span>). The Pyrrhonist answer is that the main obstacle is the anxiety of holding firm opinions: defending them, fearing they’re wrong, needing to be right. Remove the demand for certainty and you remove that anxiety. As Bett puts it, Pyrrhonism is “a way of life, one that its adherents actively recommend” <span class="cite">(p. 406)</span>.</p>
+      <p>And it is a skill, not a thesis. The Pyrrhonist doesn’t hold that nothing can be known; that would be negative dogmatism. The peace comes not from solving the question but from dropping it.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 9 ================= -->
+<section class="part" id="p9" data-title="Bett’s criticisms">
+  <div class="part-head">
+    <p class="part-no">Part 9<span class="scene">: going further, with our reading</span></p>
+    <h2>Does Pyrrhonism live up to its own rules?</h2>
+  </div>
+  <aside class="margin"><b>Our reading</b><br>Richard Bett, “Pyrrhonian Skepticism”, in <span class="gr">The Routledge Companion to Epistemology</span> (2011), pp. 403–413.</aside>
+  <p class="bite"><strong>The short version.</strong> Bett argues that Sextus doesn’t always practise what he preaches. The skeptic claims to be an open-minded inquirer with no definite positions, yet his methods sometimes look like a fixed routine, and his Modes sometimes read like arguments that we <i>must</i> suspend judgement.</p>
+
+  <details class="deep">
+    <summary>Inquirer, or tranquillity-seeker?<span class="hint">Bett, pp. 404–405</span></summary>
+    <div class="inner">
+      <p>The skeptic is defined as someone still searching. But Sextus’s definition (<span class="gr">PH</span> 1.8) describes something else: a practised ability to assemble opposing arguments so that both sides feel equally strong. That skeptic looks less like an open-minded inquirer, for whom finding the truth is still possible, and more like someone who has decided tranquillity is what he wants and that suspension is the surest way to it.</p>
+      <p>Bett allows a way out. “Equal strength” can be read psychologically: you simply find both sides equally persuasive. Suspension can be something that happens to you rather than something you decide, and wanting tranquillity can be a brute fact about the skeptic’s motivation. On that reading Sextus doesn’t fall back into dogmatism. But Bett still sees a “pre-arranged system of skeptical activity” that doesn’t fit the picture of someone still searching <span class="cite">(p. 405)</span>.</p>
+      <p class="aside"><b>Chicken rice version.</b> Is the Pyrrhonist really still tasting every stall with an open mind? Or has he just learned a reliable trick for never having to pick one?</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Why should suspension bring peace?<span class="hint">Bett, p. 405</span></summary>
+    <div class="inner">
+      <p>Whenever Sextus explains why suspension brings tranquillity, he points to dropping beliefs about what is really <b>good or bad</b>. That raises three questions:</p>
+      <ol>
+        <li>If the trouble comes from beliefs about good and bad, why suspend judgement on <i>every</i> topic?</li>
+        <li>If such beliefs are troubling because of what they’re about, whether or not they’re true, why does the failed search for truth matter at all?</li>
+        <li>In the origin story, equal strength is something you simply stumble on. But the settled skeptic deliberately <i>builds</i> balanced oppositions. Bett notes this “deliberate artifice” could invite charges of intellectual dishonesty, though the skeptic would reply that such charges assume standards of rationality he doesn’t sign up to.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Do the Modes turn into dogma?<span class="hint">Bett, pp. 407–410</span></summary>
+    <div class="inner">
+      <p>This is Bett’s sharpest point. Taken by themselves, the Modes are “most easily read as arguments to the effect that we must suspend judgment” <span class="cite">(p. 407)</span>, and that “must” sounds logical, not just psychological.</p>
+      <ul>
+        <li><b>The Five Modes</b> look like a knock-down argument that rational justification is impossible. Sextus concludes it is “absolutely necessary to suspend judgment” <span class="cite">(<span class="gr">PH</span> 1.177; Bett, p. 409)</span>. That makes them a position <i>within</i> epistemology, which is not what Sextus usually means by skepticism.</li>
+        <li><b>The Ten Modes</b> often set up oppositions you can’t feel at the same time. You can’t taste chicken rice as your cat does, or as someone else does, and you can’t be sick and healthy at once. So Sextus can’t be saying “feel the equal pull of these and find yourself suspending”. He has to be saying “there’s no way to decide, so you have no choice”, which is the force of argument again <span class="cite">(p. 409)</span>.</li>
+        <li>Several of the Ten end by saying we <i>cannot</i> say how things are by nature. That depends on a particular view of what a thing’s nature would be and how we’d grasp it, which by Sextus’s own standards is a dogmatic conclusion <span class="cite">(pp. 409–410)</span>.</li>
+      </ul>
+      <p>Bett’s explanation is historical. These relativity-based conclusions may be traces of an earlier form of Pyrrhonism, linked to Aenesidemus, which did make claims like “nothing is good or bad by nature” <span class="cite">(pp. 409–410)</span>.</p>
+      <p class="aside"><b>Chicken rice version.</b> “Taste depends on who’s eating, so we <i>cannot</i> know which stall is best” sounds a lot like the Academic in our skit. The posh Pyrrhonist has borrowed the Academic’s line.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>Can the Modes be rescued?<span class="hint">Williams’s proposal, and Sextus’s own replies</span></summary>
+    <div class="inner">
+      <p>Michael Williams suggests the Modes are only one side of an opposition, with the other side being the confident theories of knowledge held by non-skeptics. Then the Modes would just be the normal Pyrrhonist method applied to epistemology. Bett doesn’t think this fits Sextus’s text, which presents the Modes by themselves as producing suspension. But he agrees it would be a better, more consistent use of them, and that Sextus does use them this way elsewhere <span class="cite">(Bett, pp. 410–411)</span>.</p>
+      <p>Sextus also has general replies. He says the skeptic reports how things appear to him, like a chronicler, without asserting it (<span class="gr">PH</span> 1.4). His arguments work like a purgative drug that flushes itself out along with everything else (<span class="gr">PH</span> 1.206), or a ladder you kick away after climbing it (<span class="gr">Against the Logicians</span> 2.481). Whether these replies work is still debated.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>How far does suspension reach?<span class="hint">Bett, p. 406</span></summary>
+    <div class="inner">
+      <p>Does the skeptic suspend only on deep theories, keeping everyday beliefs like “I’m sitting in my office”, or on those too? Sextus’s claim to be “on the side of ordinary life” suggests the first, but Bett says this “is not clear” it is consistently sustained. Everyday beliefs might commit you to deeper ones, such as that there is a criterion of truth, which Sextus also questions. How you answer affects how believable the skeptical life is <span class="cite">(p. 406)</span>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PART 10 ================= -->
+<section class="part" id="p10" data-title="So what?">
+  <div class="part-head">
+    <p class="part-no">Part 10<span class="scene">: from the replay</span></p>
+    <h2>So what? Pyrrhonism for students</h2>
+  </div>
+  <aside class="margin"><b>In the skit</b><br>The opening argument plays again. This time, the two hawkers swap a spoonful each.</aside>
+  <p class="bite"><strong>The short version.</strong> You can care, act and enjoy things without demanding certainty about them. That makes you harder to drag into online outrage, and a better reader of theories.</p>
+
+  <details class="deep">
+    <summary>In everyday life<span class="hint">Echo chambers and binary positions</span></summary>
+    <div class="inner">
+      <p>Algorithms, echo chambers and outrage cycles reward rigid, binary positions: Stall A or Stall B, us or them. Defending those positions all the time costs a lot of emotional energy. A Pyrrhonian attitude still lives by appearances and acts sensibly, still cares about other people and takes part in daily life, but drops the demand for certainty on matters that can’t be settled.</p>
+      <p>That isn’t indifference. It’s giving up intellectual point-scoring in exchange for peace of mind.</p>
+    </div>
+  </details>
+
+  <details class="deep">
+    <summary>In our studies<span class="hint">Reading theories without becoming their fan club</span></summary>
+    <div class="inner">
+      <p>Every week we meet persuasive theories. It’s easy to fall for the first clever one and defend it dogmatically, and just as easy to swing to cynical nihilism when it gets taken apart. A Pyrrhonian student asks instead:</p>
+      <ul>
+        <li>What are the strongest opposing arguments to this theory?</li>
+        <li>Where does its chain of justification hit an Agrippan wall?</li>
+      </ul>
+      <p>That lets you appreciate a model’s beauty and usefulness without mistaking it for reality, much like our seminar discussions of scientific realism and anti-realism.</p>
+    </div>
+  </details>
+
+  <p class="closing">Eat the chicken rice while it’s still warm.</p>
+  <p>Taste it, enjoy it, compare it, keep inquiring. Just don’t let the need to prove it’s the best ruin your lunch.</p>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="part" id="quiz" data-title="Which stance are you?">
+  <div class="part-head">
+    <p class="part-no">Before you go</p>
+    <h2>Which stance are you, really?</h2>
+  </div>
+  <p class="bite"><strong>Five quick situations.</strong> Pick the reaction closest to yours. No wrong answers, only dogmatic ones.</p>
+  <div class="lab" id="quizLab" aria-live="polite"></div>
+</section>
+
+<!-- ================= GLOSSARY ================= -->
+<section class="part" id="glossary" data-title="Glossary">
+  <div class="part-head">
+    <p class="part-no">Reference</p>
+    <h2>Glossary</h2>
+  </div>
+  <dl class="gloss">
+    <dt>Dogmatist</dt><dd>Someone who claims to have found the truth on a disputed question.</dd>
+    <dt>Academic Skeptic</dt><dd>As Sextus presents them, someone who claims the truth cannot be found.</dd>
+    <dt>Negative dogmatism</dt><dd>Confidently asserting that knowledge is impossible. A modern label, not Sextus’s own.</dd>
+    <dt>Pyrrhonist</dt><dd>A skeptic, literally an “inquirer”, who suspends judgement.</dd>
+    <dt><span class="gr">Epoché</span></dt><dd>Suspension of judgement: neither affirming nor denying.</dd>
+    <dt><span class="gr">Isostheneia</span></dt><dd>Equal strength of opposing arguments or impressions.</dd>
+    <dt><span class="gr">Ataraxia</span></dt><dd>Tranquillity; freedom from mental disturbance.</dd>
+    <dt><span class="gr">Metriopatheia</span></dt><dd>Moderate feeling in things that can’t be avoided.</dd>
+    <dt><span class="gr">Eudaimonia</span></dt><dd>Flourishing; the good life.</dd>
+    <dt>Appearance</dt><dd>How something seems to us, which the Pyrrhonist accepts.</dd>
+    <dt>Non-evident</dt><dd>Hidden matters beyond appearances, on which the Pyrrhonist suspends judgement.</dd>
+    <dt>The Modes</dt><dd>Standard argument patterns for producing equal strength: the Ten (Aenesidemus) and the Five (Agrippa).</dd>
+    <dt>Skeptical hypothesis</dt><dd>A scenario that can’t be ruled out from the inside: a dream, a demon, a simulation.</dd>
+    <dt>Manifest image</dt><dd>The world as ordinarily experienced (Sellars).</dd>
+    <dt>Scientific image</dt><dd>The world as described by science (Sellars).</dd>
+    <dt>Agrippan trilemma</dt><dd>Regress, circularity or arbitrary assumption: the three exits when justifying a claim.</dd>
+    <dt>Problem of induction</dt><dd>Hume’s point that we can’t non-circularly justify trusting the past to predict the future.</dd>
+  </dl>
+</section>
+
+<section class="part" id="refs" data-title="References">
+  <div class="part-head">
+    <p class="part-no">Reference</p>
+    <h2>Sources and further reading</h2>
+  </div>
+  <ul class="refs">
+    <li>Bett, R. (2011). “Pyrrhonian Skepticism.” In S. Bernecker &amp; D. Pritchard (Eds.), <span class="gr">The Routledge Companion to Epistemology</span> (pp. 403–413). Routledge. <i>Our set reading.</i></li>
+    <li>Sextus Empiricus. <span class="gr">Outlines of Scepticism</span> (J. Annas &amp; J. Barnes, Trans.; 2nd ed., 2000). Cambridge University Press. Especially Book 1.</li>
+    <li>Bostrom, N. (2003). “Are You Living in a Computer Simulation?” <span class="gr">Philosophical Quarterly</span>, 53(211), 243–255.</li>
+    <li>Burnyeat, M. (1980). “Can the Sceptic Live His Scepticism?” In <span class="gr">Doubt and Dogmatism</span>. Oxford University Press.</li>
+    <li>Descartes, R. (1641). <span class="gr">Meditations on First Philosophy</span>, Meditations I–II.</li>
+    <li>Dutilh Novaes, C. (2020). <span class="gr">The Dialogical Roots of Deduction</span>. Cambridge University Press, Chapter 3.</li>
+    <li>Hume, D. (1748). <span class="gr">An Enquiry concerning Human Understanding</span>, Sections 4, 5 and 12.</li>
+    <li>Sellars, W. (1956). “Empiricism and the Philosophy of Mind.” And (1962). “Philosophy and the Scientific Image of Man.”</li>
+    <li>Williams, M. (2010). “Descartes’ Transformation of the Skeptical Tradition.” In R. Bett (Ed.), <span class="gr">The Cambridge Companion to Ancient Scepticism</span>. Cambridge University Press.</li>
+    <li>Wittgenstein, L. (1953). <span class="gr">Philosophical Investigations</span>, §§201–242.</li>
+  </ul>
+</section>
+</main>
+
+<footer class="end">
+  <p>A companion to our SP0001 group presentation on Pyrrhonian skepticism. Everything here builds on the skit you just watched, with a little more room to think.</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- hero ---------- */
+  var verdicts = {
+    dogmatist: {name:"You answered like a Dogmatist.", text:"You think the truth has been found. Aristotle, Epicurus and the Stoics would welcome you, and so would both hawkers in our skit."},
+    academic: {name:"You answered like an Academic Skeptic.", text:"Humble-sounding, but “nobody can ever know” is itself a confident claim about knowledge. Sextus would call it dogmatism pointing the other way."},
+    pyrrhonist: {name:"You answered like a Pyrrhonist.", text:"You accept how it tastes, but hold back on whether it really is the best. That’s the stance Sextus calls skeptical: still looking."}
+  };
+  var answers = document.querySelectorAll('.answer');
+  var verdict = document.getElementById('verdict');
+  answers.forEach(function(b){
+    b.addEventListener('click', function(){
+      var s = b.getAttribute('data-s');
+      answers.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      document.body.setAttribute('data-stance', s);
+      var v = verdicts[s];
+      verdict.innerHTML = '<div class="verdict-in"><p class="who '+s+'">'+v.name+'</p><p>'+v.text+'</p><p><a href="#p1">See all three stances in Part 1</a></p></div>';
+    });
+  });
+
+  /* ---------- depth toggle ---------- */
+  var quickBtn = document.getElementById('quickBtn');
+  var fullBtn = document.getElementById('fullBtn');
+  function setDepth(full){
+    quickBtn.setAttribute('aria-pressed', full ? 'false' : 'true');
+    fullBtn.setAttribute('aria-pressed', full ? 'true' : 'false');
+    document.querySelectorAll('details.deep').forEach(function(d){ d.open = full; });
+  }
+  quickBtn.addEventListener('click', function(){ setDepth(false); });
+  fullBtn.addEventListener('click', function(){ setDepth(true); });
+
+  /* ---------- progress strip ---------- */
+  var parts = Array.prototype.slice.call(document.querySelectorAll('section.part[id^="p"]'));
+  var strip = document.getElementById('strip');
+  var barTitle = document.getElementById('barTitle');
+  parts.forEach(function(p, i){
+    var a = document.createElement('a');
+    a.href = '#' + p.id;
+    a.setAttribute('aria-label', 'Part ' + (i+1) + ': ' + p.getAttribute('data-title'));
+    a.title = 'Part ' + (i+1) + ': ' + p.getAttribute('data-title');
+    strip.appendChild(a);
+  });
+  var links = strip.querySelectorAll('a');
+  function updateProgress(){
+    var y = window.scrollY + window.innerHeight * 0.35;
+    var current = -1;
+    parts.forEach(function(p, i){ if (p.offsetTop <= y) current = i; });
+    links.forEach(function(l, i){
+      l.classList.toggle('now', i === current);
+      l.classList.toggle('done', i < current);
+      if (i === current) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+    });
+    if (current >= 0) {
+      barTitle.innerHTML = '<b>Part ' + (current+1) + ' of 10</b> &nbsp;' + parts[current].getAttribute('data-title');
+    } else {
+      barTitle.innerHTML = '<b>Suspend judgement, eat rice</b>';
+    }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking){ window.requestAnimationFrame(function(){ updateProgress(); ticking = false; }); ticking = true; }
+  }, {passive:true});
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  /* ---------- ten modes ---------- */
+  var modes = [
+    ["Animals","Different creatures perceive differently","Your cat and you experience the same chicken very differently."],
+    ["Humans","People’s bodies and tastes vary","You find the chilli perfect; your friend finds it too sour."],
+    ["Senses","The senses disagree about one object","It smells amazing but tastes average. Which sense is right?"],
+    ["Circumstances","Your state changes how things appear","Starving, it’s amazing. Full, it’s ordinary or even unpleasant."],
+    ["Positions","Where you stand changes what you see","From across the hawker centre, the queue looks short."],
+    ["Mixtures","We never sense things pure","You never taste the chicken without the sauce, the air and your own saliva."],
+    ["Quantities","Amount changes the effect","One bite is perfect; the tenth plate is too much."],
+    ["Relativity","Everything appears relative to something","“Best” is always best for someone, or compared to something."],
+    ["Frequency","Rare things impress more","Once a year it’s amazing; every day, it’s just lunch."],
+    ["Customs","Cultures and traditions disagree","Hainanese and Cantonese styles disagree on what chicken rice should be."]
+  ];
+  var modesEl = document.getElementById('modes');
+  modes.forEach(function(m, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'mode-card';
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label', 'Mode ' + (i+1) + ', ' + m[0] + ': ' + m[1] + '. Show chicken rice example.');
+    b.innerHTML =
+      '<span class="face front" aria-hidden="true"><span class="n">'+(i+1)+'</span><span class="name">'+m[0]+'</span><span class="idea">'+m[1]+'</span></span>' +
+      '<span class="face back" aria-hidden="true"><span class="eg">'+m[2]+'</span><span class="tag">Mode '+(i+1)+': '+m[0]+'</span></span>';
+    var live = document.createElement('span');
+    live.className = 'sr';
+    live.setAttribute('aria-live','polite');
+    b.appendChild(live);
+    b.addEventListener('click', function(){
+      var on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      live.textContent = on ? m[2] : '';
+    });
+    modesEl.appendChild(b);
+  });
+
+  /* ---------- why chain ---------- */
+  var claimText = "Stall A is the best chicken rice in Singapore.";
+  var reasons = [
+    "Because the chilli has the perfect balance of lime and ginger.",
+    "Because that balance makes every bite taste brighter.",
+    "Because brighter-tasting chicken rice is better chicken rice."
+  ];
+  var exits = {
+    regress: {
+      label:"Keep giving reasons", sub:"There’s always one more “because”",
+      title:"Infinite regress",
+      text:"Every reason needs another reason, and the chain never ends. You could do this until the stall closes, and the claim would still not be justified, because the justification is never finished."
+    },
+    circle: {
+      label:"“Because it’s the best chicken rice”", sub:"Point back to where you started",
+      title:"Circularity",
+      text:"Your final reason assumes the very thing you set out to prove. “It’s the best because it’s better” goes round in a circle, so nothing has actually been shown."
+    },
+    hypothesis: {
+      label:"“Because I say so!”", sub:"Slap the table and stop",
+      title:"Hypothesis (the parent slam)",
+      text:"The questions stop, but nothing has been justified. Sextus treats this as arbitrary: you could just as easily have assumed the opposite. Hume would say this is how we live with induction too, on custom and habit."
+    }
+  };
+  var chain = document.getElementById('chain');
+  var controls = document.getElementById('whyControls');
+  var result = document.getElementById('whyResult');
+  var step = 0;
+  function li(cls, text){ var x = document.createElement('li'); x.className = cls; x.textContent = text; return x; }
+  function renderWhy(){
+    chain.innerHTML = '';
+    result.innerHTML = '';
+    chain.appendChild(li('claim-line', '“' + claimText + '”'));
+    for (var i = 0; i < step; i++){
+      chain.appendChild(li('why', 'Why?'));
+      chain.appendChild(li('reason', reasons[i]));
+    }
+    controls.innerHTML = '';
+    if (step < reasons.length){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn';
+      b.textContent = step === 0 ? 'Get asked why' : 'Get asked why again';
+      b.addEventListener('click', function(){ step++; renderWhy(); var n = controls.querySelector('button'); if (n) n.focus(); });
+      controls.appendChild(b);
+    } else {
+      chain.appendChild(li('why', 'Why?'));
+      var p = document.createElement('p');
+      p.className = 'lab-sub';
+      p.style.marginTop = '.25rem';
+      p.textContent = 'You’ve been asked why again. Choose how you answer:';
+      controls.appendChild(p);
+      var wrap = document.createElement('div'); wrap.className = 'exits';
+      Object.keys(exits).forEach(function(k){
+        var e = exits[k];
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'exit';
+        b.innerHTML = e.label + '<small>' + e.sub + '</small>';
+        b.addEventListener('click', function(){
+          result.innerHTML = '<div class="trap"><h4>' + e.title + '</h4><p>' + e.text + '</p><p>So which exit does a Pyrrhonist take? None of them. He notices that every road ends in one of these three, suspends judgement, and orders lunch anyway.</p><div class="btn-row"><button type="button" class="btn ghost" id="whyRestart">Start again</button></div></div>';
+          document.getElementById('whyRestart').addEventListener('click', function(){ step = 0; renderWhy(); controls.querySelector('button').focus(); });
+        });
+        wrap.appendChild(b);
+      });
+      controls.appendChild(wrap);
+    }
+  }
+  renderWhy();
+
+  /* ---------- quiz ---------- */
+  var quiz = [
+    {q:"Your friend insists their stall is the best in Singapore. You say:", o:[
+      ["d","“Wrong. Mine is, and I can prove it.”"],
+      ["a","“Nobody can ever know which one is best.”"],
+      ["p","“Maybe. Mine tastes great to me too. Let’s keep eating.”"]]},
+    {q:"Someone points out you’ve only ever tried twelve stalls.", o:[
+      ["d","Doesn’t matter. I know good chicken rice when I taste it."],
+      ["a","Exactly, which is why knowing the best is impossible."],
+      ["p","Fair point. I’ll hold off on ranking them."]]},
+    {q:"It’s 11pm and the argument is still on your mind.", o:[
+      ["d","I’m drafting my rebuttal for tomorrow."],
+      ["a","I’m composing a speech on why nobody can win this debate."],
+      ["p","I’m asleep. It tasted good; that was enough."]]},
+    {q:"A food scientist says chicken breast is about 20–24% protein.", o:[
+      ["d","So that’s what makes mine objectively the best."],
+      ["a","See? Science can’t tell us which tastes better either, so nothing can."],
+      ["p","Interesting. It still tastes juicy to me."]]},
+    {q:"This week’s reading presents a very convincing theory.", o:[
+      ["d","That settles it. I’m convinced."],
+      ["a","Every theory fails eventually, so none can be known."],
+      ["p","What’s the strongest argument against it?"]]}
+  ];
+  var results = {
+    d:{name:"Dogmatist", cls:"dogmatist", text:"You like your answers settled. Sextus would say you’ve stopped searching too early, but you’re in good company: Aristotle, the Stoics and most hawkers."},
+    a:{name:"Academic Skeptic", cls:"academic", text:"You’re suspicious of every claim to know, except your own claim that nobody can know. Sextus would gently point out that’s still a firm position."},
+    p:{name:"Pyrrhonist", cls:"pyrrhonist", text:"You go along with how things seem and hold back on the big claims. Bett might ask whether you’re still truly inquiring, or just very good at never choosing (Part 9)."},
+    mix:{name:"A bit of everything", cls:"", text:"You switch stances depending on the question. Honestly, that’s most of us. The Pyrrhonist’s challenge is to notice when you’ve quietly become a dogmatist."}
+  };
+  var qi = 0, score = {d:0,a:0,p:0};
+  var quizLab = document.getElementById('quizLab');
+  function renderQuiz(){
+    if (qi < quiz.length){
+      var item = quiz[qi];
+      var html = '<p class="quiz-meta">Situation ' + (qi+1) + ' of ' + quiz.length + '</p><p class="quiz-q">' + item.q + '</p><div class="quiz-opts">';
+      item.o.forEach(function(o, j){ html += '<button type="button" class="quiz-opt" data-k="' + o[0] + '">' + o[1] + '</button>'; });
+      html += '</div>';
+      quizLab.innerHTML = html;
+      quizLab.querySelectorAll('.quiz-opt').forEach(function(b){
+        b.addEventListener('click', function(){ score[b.getAttribute('data-k')]++; qi++; renderQuiz(); var f = quizLab.querySelector('button'); if (f) f.focus({preventScroll:true}); });
+      });
+    } else {
+      var max = Math.max(score.d, score.a, score.p);
+      var tops = ['d','a','p'].filter(function(k){ return score[k] === max; });
+      var r = tops.length === 1 ? results[tops[0]] : results.mix;
+      var colors = {d:'var(--chilli)', a:'var(--ink)', p:'var(--cucumber)'};
+      var names = {d:'Dogmatist', a:'Academic', p:'Pyrrhonist'};
+      var bars = '';
+      ['d','a','p'].forEach(function(k){
+        bars += '<div class="qbar"><span>' + names[k] + '</span><span class="track"><span class="fill" data-w="' + (score[k]/quiz.length*100) + '" style="width:' + (reduce ? (score[k]/quiz.length*100) : 0) + '%;background:' + colors[k] + '"></span></span><span>' + score[k] + '</span></div>';
+      });
+      quizLab.innerHTML = '<p class="quiz-meta">Your result</p><p class="result-name" style="color:' + (r.cls ? 'var(--' + {dogmatist:'chilli',academic:'ink',pyrrhonist:'cucumber'}[r.cls] + ')' : 'var(--soy)') + '">' + r.name + '</p><p>' + r.text + '</p><div class="quiz-bars">' + bars + '</div><div class="btn-row"><button type="button" class="btn ghost" id="quizAgain">Take it again</button></div>';
+      if (!reduce){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ quizLab.querySelectorAll('.fill').forEach(function(f){ f.style.width = f.getAttribute('data-w') + '%'; }); }); }); }
+      document.getElementById('quizAgain').addEventListener('click', function(){ qi = 0; score = {d:0,a:0,p:0}; renderQuiz(); quizLab.querySelector('button').focus({preventScroll:true}); });
+    }
+  }
+  renderQuiz();
+})();
+</script>
+</body>
+</html>
